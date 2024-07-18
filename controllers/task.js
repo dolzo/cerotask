@@ -3,7 +3,7 @@ const Task = require('../models/task');
 const validate = require('../helpers/validate');
 
 // Crear tarea
-// : autenticar con jwt
+// TODO: autenticar con jwt
 const createTask = async (req, res) => {
     // Recoger parametros
     const params = req.body;
