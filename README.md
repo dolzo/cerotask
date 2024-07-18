@@ -11,19 +11,25 @@
 1. Clonar el repositorio:
 
     ```bash
-
+    git clone https://github.com/LeDolz/cerotask
     ```
 
 2. Navegar al directorio del proyecto:
 
     ```
-
+    cd cerotask
     ```
 
 3. Instalar las dependencias:
 
     ```
+    npm install
+    ```
 
+4. Iniciar el proyecto:
+
+    ```
+    node index.js
     ```
 
 ## Rutas y endpoints
