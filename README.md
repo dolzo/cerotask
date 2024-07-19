@@ -38,9 +38,9 @@
 
 #### `POST /apiv1/user/create-user`
 
-Se crea un usuario y se guarda en la base de datos
+Se crea un usuario y se guarda en la base de datos.
 
-Request:
+##### Request:
 
 ```
 {
@@ -51,7 +51,7 @@ Request:
 }
 ```
 
-Response:
+##### Response:
 
 ```
 {
@@ -71,9 +71,9 @@ Response:
 
 #### `POST /apiv1/user/login`
 
-Se crea un usuario y se guarda en la base de datos
+Se inicia sesion con un usuario guardado en la base de datos.
 
-Request:
+##### Request:
 
 ```
 {
@@ -82,7 +82,7 @@ Request:
 }
 ```
 
-Response:
+##### Response:
 
 ```
 {
@@ -105,9 +105,35 @@ Response:
 
 #### `POST /apiv1/task/create-task`
 
-Se crea una nueva tarea con los datos indicados en el body de la solicitud
+Se crea una nueva tarea con los datos indicados en el body de la solicitud, esta requiere un usuario asignado a la tarea.
 
 ##### Headers
 
 -   Authorization: JSON web token
 -   Content-Type: multipart/form-data
+
+##### Request
+
+```
+{
+    title: cama,
+    description: hacer la cama,
+    user: 669aab39abf1694a611e62d4
+}
+```
+
+##### Response
+
+{
+"status": "ok",
+"message": "Tarea guardada",
+"savedTask": {
+"title": "cama",
+"description": "hacer la cama",
+"completed": false,
+"user": "669aab39abf1694a611e62d4",
+"\_id": "669ab168406cbe2cc759d2c3",
+"created_at": "2024-07-19T18:33:12.266Z",
+"\_\_v": 0
+}
+}
