@@ -21,7 +21,7 @@ const auth = (req, res, next) => {
 
     // Decodificar el token
     try {
-        const payload = jwt.decode(token, secret);
+        const payload = jwt.decode(token, secretKey);
 
         // Verificar expiracion del token
         if (payload.exp <= moment().unix()) {

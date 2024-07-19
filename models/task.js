@@ -14,6 +14,11 @@ const TaskSchema = Schema({
         type: Boolean,
         default: false,
     },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     created_at: {
         type: Date,
         default: Date.now,
