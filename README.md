@@ -42,7 +42,7 @@ Se crea un usuario y se guarda en la base de datos.
 
 ##### Headers
 
--   Content-Type: application/x-www-form-urlencoded
+-   Content-Type: `application/x-www-form-urlencoded`
 
 ##### Request
 
@@ -73,7 +73,7 @@ Se inicia sesion con un usuario guardado en la base de datos.
 
 ##### Headers
 
--   Content-Type: application/x-www-form-urlencoded
+-   Content-Type: `application/x-www-form-urlencoded`
 
 ##### Request
 
@@ -105,8 +105,8 @@ Retorna todos los usuario registrados, para usar este endpoint se requiere tener
 
 ##### Headers
 
--   Authorization: JSON web token
--   Content-Type: application/x-www-form-urlencoded
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWU5ZGNmMTQ0MDIyMmExYTkzMDIyMiIsIm5hbWUiOiJub21icmUiLCJzdXJuYW1lIjoiYXBlbGxpZG8iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvIiwicm9sZSI6InVzZXJfYWRtaW4iLCJpYXQiOjE3MjE2NzExNDUsImV4cCI6MTcyNDI2MzE0NX0.CHsfdYzCP7qAii_ja0aJCtlyQQ9ZXFtiXd-b3ZiM9Ro`
+-   Content-Type: `application/x-www-form-urlencoded`
 
 ##### Request
 
@@ -150,8 +150,8 @@ Se crea una nueva tarea con los datos indicados en el body de la solicitud, esta
 
 ##### Headers
 
--   Authorization: JSON web token
--   Content-Type: application/x-www-form-urlencoded
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWFhYjM5YWJmMTY5NGE2MTFlNjJkNCIsIm5hbWUiOiJub21icmUiLCJzdXJuYW1lIjoiYXBlbGxpZG8iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTcyMTQxMjgyMSwiZXhwIjoxNzI0MDA0ODIxfQ.mV3_VLTD4R1pJEQwWr-Voxc8wK2hgF-VnmYt_aTl2tU`
+-   Content-Type: `application/x-www-form-urlencoded`
 
 ##### Request
 
