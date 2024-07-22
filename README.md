@@ -110,7 +110,37 @@ Retorna todos los usuario registrados, para usar este endpoint se requiere tener
 
 ##### Request
 
+No hay parametros de consulta en esta solicitud
+
 ##### Response
+
+```json
+{
+    "status": "ok",
+    "users": [
+        {
+            "_id": "669ea56f8323a027be75f2a9",
+            "name": "nombre",
+            "surname": "apellido",
+            "email": "email@email.com",
+            "password": "$2b$10$J6/ZFDly4NELAD0CRTwwueVVptLgwero4UbzsbI/ZR6ss2Q55X7Rm",
+            "role": "role_user",
+            "created_at": "2024-07-22T18:31:11.096Z",
+            "__v": 0
+        },
+        {
+            "_id": "669ea5cb8323a027be75f2ad",
+            "name": "nombre",
+            "surname": "apellido",
+            "email": "email@email.co",
+            "password": "$2b$10$aCxxQenZks84bEIRwHq35.eRFf8RrYkC7ImrJvJrE2I8Q0d0RcsKK",
+            "role": "role_admin",
+            "created_at": "2024-07-22T18:32:43.650Z",
+            "__v": 0
+        }
+    ]
+}
+```
 
 ### Tareas
 
