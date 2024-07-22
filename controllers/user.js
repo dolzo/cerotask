@@ -111,4 +111,40 @@ const loginUser = async (req, res) => {
     });
 };
 
-module.exports = { createUser, loginUser };
+// Obtener todos los usuarios
+
+const getUsers = async (req, res) => {
+    currentUser = req.user;
+
+    if (currentUser.role != 'user_admin') {
+        return res.status(403).send({
+            status: 'error',
+            message: 'Acceso no autorizado',
+        });
+    }
+
+    try {
+        const users = await User.find();
+
+        if (!users) {
+            return res.status(200).send({
+                status: 'ok',
+                message: 'No se han encontrado usuarios',
+            });
+        }
+
+        return res.status(200).send({
+            status: 'ok',
+            users,
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: 'error',
+            error,
+        });
+    }
+};
+
+// TODO: Obtener un usuario en especifico
+
+module.exports = { createUser, loginUser, getUsers };
