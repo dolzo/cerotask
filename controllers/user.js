@@ -3,6 +3,7 @@ const User = require('../models/user');
 const validate = require('../helpers/validate');
 const jwt = require('../helpers/jwt');
 const bcrypt = require('bcrypt');
+const user = require('../models/user');
 
 // Crear usuario
 
@@ -114,8 +115,10 @@ const loginUser = async (req, res) => {
 // Obtener todos los usuarios
 
 const getUsers = async (req, res) => {
+    // Usuario del jwt
     currentUser = req.user;
 
+    // Comprobar si el usuario es admin
     if (currentUser.role != 'user_admin') {
         return res.status(403).send({
             status: 'error',
@@ -124,10 +127,11 @@ const getUsers = async (req, res) => {
     }
 
     try {
+        // Buscar el usuario
         const users = await User.find();
 
         if (!users) {
-            return res.status(200).send({
+            return res.status(404).send({
                 status: 'ok',
                 message: 'No se han encontrado usuarios',
             });
@@ -138,7 +142,7 @@ const getUsers = async (req, res) => {
             users,
         });
     } catch (error) {
-        return res.status(500).send({
+        return res.status(400).send({
             status: 'error',
             error,
         });
@@ -148,9 +152,41 @@ const getUsers = async (req, res) => {
 // Obtener un usuario especifico
 
 const getSpecificUser = async (req, res) => {
-    return res.status(200).send({
-        status: 'ok',
-        message: 'Usuario especifico',
-    });
+    // Usuario logeado
+    const currentUser = req.user;
+
+    // Comprobar si el usuario es admin
+    if (currentUser.role != 'user_admin') {
+        return res.status(403).send({
+            status: 'error',
+            message: 'Acceso no autorizado',
+        });
+    }
+
+    // Parametro de id de usuario en la url
+    const userId = req.params.id;
+
+    try {
+        // Buscar el usuario
+        const userFound = await User.findById(userId);
+
+        if (!userFound) {
+            return res.status(404).send({
+                status: 'ok',
+                message: 'No se ha encontrado al usuario',
+                userFound,
+            });
+        }
+
+        return res.status(200).send({
+            status: 'ok',
+            userFound,
+        });
+    } catch (error) {
+        return res.status(400).send({
+            status: 'error',
+            error,
+        });
+    }
 };
 module.exports = { createUser, loginUser, getUsers, getSpecificUser };
