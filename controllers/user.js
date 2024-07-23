@@ -145,6 +145,12 @@ const getUsers = async (req, res) => {
     }
 };
 
-// TODO: Obtener un usuario en especifico
+// Obtener un usuario especifico
 
-module.exports = { createUser, loginUser, getUsers };
+const getSpecificUser = async (req, res) => {
+    return res.status(200).send({
+        status: 'ok',
+        message: 'Usuario especifico',
+    });
+};
+module.exports = { createUser, loginUser, getUsers, getSpecificUser };

@@ -12,5 +12,6 @@ const user = require('../controllers/user');
 router.post('/create-user', user.createUser);
 router.post('/login', user.loginUser);
 router.get('/users', auth, user.getUsers);
+router.get('/users/:id', auth, user.getSpecificUser);
 
 module.exports = router;
