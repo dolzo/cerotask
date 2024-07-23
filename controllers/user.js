@@ -120,7 +120,7 @@ const getUsers = async (req, res) => {
 
     try {
         // Buscar el usuario
-        const users = await User.find();
+        const users = await User.find().select('-password');
 
         if (!users) {
             return res.status(404).send({
@@ -152,7 +152,7 @@ const getSpecificUser = async (req, res) => {
 
     try {
         // Buscar el usuario
-        const userFound = await User.findById(userId);
+        const userFound = await User.findById(userId).select('-password');
 
         if (!userFound) {
             return res.status(404).send({

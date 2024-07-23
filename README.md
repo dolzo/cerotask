@@ -123,7 +123,6 @@ No hay parametros de consulta en esta solicitud
             "name": "nombre",
             "surname": "apellido",
             "email": "email@email.com",
-            "password": "$2b$10$J6/ZFDly4NELAD0CRTwwueVVptLgwero4UbzsbI/ZR6ss2Q55X7Rm",
             "role": "role_user",
             "created_at": "2024-07-22T18:31:11.096Z",
             "__v": 0
@@ -133,7 +132,6 @@ No hay parametros de consulta en esta solicitud
             "name": "nombre",
             "surname": "apellido",
             "email": "email@email.co",
-            "password": "$2b$10$aCxxQenZks84bEIRwHq35.eRFf8RrYkC7ImrJvJrE2I8Q0d0RcsKK",
             "role": "role_admin",
             "created_at": "2024-07-22T18:32:43.650Z",
             "__v": 0
@@ -165,7 +163,6 @@ Retorna un usuario en especifico, esto basado en el id de usuario, para este end
         "name": "nombre",
         "surname": "apellido",
         "email": "email@email.com",
-        "password": "$2b$10$J6/ZFDly4NELAD0CRTwwueVVptLgwero4UbzsbI/ZR6ss2Q55X7Rm",
         "role": "role_user",
         "created_at": "2024-07-22T18:31:11.096Z",
         "__v": 0
