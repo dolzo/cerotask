@@ -142,6 +142,37 @@ No hay parametros de consulta en esta solicitud
 }
 ```
 
+#### `GET /apiv1/user/users/:id`
+
+Retorna un usuario en especifico, esto basado en el id de usuario, para este endpoint se requiere tener un token de autenticacion de un usuario con rol de administrador.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWU5ZGNmMTQ0MDIyMmExYTkzMDIyMiIsIm5hbWUiOiJub21icmUiLCJzdXJuYW1lIjoiYXBlbGxpZG8iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvIiwicm9sZSI6InVzZXJfYWRtaW4iLCJpYXQiOjE3MjE2NzExNDUsImV4cCI6MTcyNDI2MzE0NX0.CHsfdYzCP7qAii_ja0aJCtlyQQ9ZXFtiXd-b3ZiM9Ro`
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`id=669ea56f8323a027be75f2a9`
+
+##### Response
+
+```
+{
+    "status": "ok",
+    "userFound": {
+        "_id": "669ea56f8323a027be75f2a9",
+        "name": "nombre",
+        "surname": "apellido",
+        "email": "email@email.com",
+        "password": "$2b$10$J6/ZFDly4NELAD0CRTwwueVVptLgwero4UbzsbI/ZR6ss2Q55X7Rm",
+        "role": "role_user",
+        "created_at": "2024-07-22T18:31:11.096Z",
+        "__v": 0
+    }
+}
+```
+
 ### Tareas
 
 #### `POST /apiv1/task/create-task`
