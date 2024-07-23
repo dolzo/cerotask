@@ -118,14 +118,6 @@ const getUsers = async (req, res) => {
     // Usuario del jwt
     currentUser = req.user;
 
-    // Comprobar si el usuario es admin
-    if (currentUser.role != 'user_admin') {
-        return res.status(403).send({
-            status: 'error',
-            message: 'Acceso no autorizado',
-        });
-    }
-
     try {
         // Buscar el usuario
         const users = await User.find();
@@ -154,14 +146,6 @@ const getUsers = async (req, res) => {
 const getSpecificUser = async (req, res) => {
     // Usuario logeado
     const currentUser = req.user;
-
-    // Comprobar si el usuario es admin
-    if (currentUser.role != 'user_admin') {
-        return res.status(403).send({
-            status: 'error',
-            message: 'Acceso no autorizado',
-        });
-    }
 
     // Parametro de id de usuario en la url
     const userId = req.params.id;

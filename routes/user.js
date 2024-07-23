@@ -1,6 +1,7 @@
 // Dependencias
 const express = require('express');
 const auth = require('../middleware/auth');
+const checkAdminRole = require('../middleware/checkAdminRole');
 
 // Cargar router
 const router = express.Router();
@@ -11,7 +12,7 @@ const user = require('../controllers/user');
 // Rutas
 router.post('/create-user', user.createUser);
 router.post('/login', user.loginUser);
-router.get('/users', auth, user.getUsers);
-router.get('/users/:id', auth, user.getSpecificUser);
+router.get('/users', auth, checkAdminRole, user.getUsers);
+router.get('/users/:id', auth, checkAdminRole, user.getSpecificUser);
 
 module.exports = router;
