@@ -49,6 +49,36 @@ const validateLogin = (params) => {
     }
 };
 
+// Validar datos update
+const validateUpdate = (params) => {
+    // Validar nombre
+    let name =
+        validator.isLength(params.name, { min: 3, max: undefined }) &&
+        validator.isAlpha(params.name, 'es-ES');
+
+    // Validar apellido
+    let surname =
+        validator.isLength(params.surname, { min: 2, max: undefined }) &&
+        validator.isAlpha(params.surname, 'es-ES');
+
+    // Validar email
+    let email = true;
+
+    // Validar contrasenia
+    let password = validator.isStrongPassword(params.password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 0,
+    });
+
+    // Comprobar si todo anda bien
+    if (!name || !surname || !email || !password) {
+        throw new Error('No se ha superado la validacion del registro');
+    }
+};
+
 // Validar crecion de tarea
 const validateTaskCreation = (params) => {
     // Validar titulo
@@ -68,4 +98,9 @@ const validateTaskCreation = (params) => {
     }
 };
 
-module.exports = { validateUserCreation, validateLogin, validateTaskCreation };
+module.exports = {
+    validateUserCreation,
+    validateLogin,
+    validateTaskCreation,
+    validateUpdate,
+};
