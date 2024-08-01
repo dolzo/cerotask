@@ -14,5 +14,6 @@ router.post('/create-user', user.createUser);
 router.post('/login', user.loginUser);
 router.get('/users', auth, checkAdminRole, user.getUsers);
 router.get('/users/:id', auth, checkAdminRole, user.getSpecificUser);
+router.post('/update-user/:id', auth, user.updateUser);
 
 module.exports = router;
