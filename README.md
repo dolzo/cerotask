@@ -170,6 +170,37 @@ Retorna un usuario en especifico, esto basado en el id de usuario, para este end
 }
 ```
 
+#### `PUT /apiv1/user/update-user/`
+
+Se actualiza el usuario del Json web token con el cual se llame a este endpoint. No es necesario entregar todos los parametros del usuario, puesto que tan solo se tomaran en cuenta los que se entreguen para la actualizacion.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWVhNWNiODMyM2EwMjdiZTc1ZjJhZCIsIm5hbWUiOiJOb21icmUiLCJzdXJuYW1lIjoiQXBlbGxpZG8iLCJlbWFpbCI6ImNvcnJlb0BtZW1lLmNvbSIsInJvbGUiOiJyb2xlX2FkbWluIiwiaWF0IjoxNzIyNTQ1MTI0LCJleHAiOjE3MjUxMzcxMjR9.3zjTe9f_KiikLKXwg_eCVSQg3zbfUJrQp1Jk5YzMNkw`
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`name=Nombre&surname=Apellido&email=correo@proveedor.com&password=Password1`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "message": "Usuario actualizado",
+    "updatedUser": {
+        "_id": "669ea5cb8323a027be75f2ad",
+        "name": "Nombre",
+        "surname": "Apellido",
+        "email": "correo@proveedor.com",
+        "role": "role_admin",
+        "created_at": "2024-07-22T18:32:43.650Z",
+        "__v": 0
+    }
+}
+```
+
 ### Tareas
 
 #### `POST /apiv1/task/create-task`
