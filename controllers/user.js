@@ -173,4 +173,80 @@ const getSpecificUser = async (req, res) => {
         });
     }
 };
-module.exports = { createUser, loginUser, getUsers, getSpecificUser };
+
+// Modificar un usuario especifico
+
+const updateUser = async (req, res) => {
+    // Recoger datos del usuario
+    const userIdentity = req.user;
+
+    // Recoger datos a actualizar
+    const params = req.body;
+
+    // Validar parametros
+    try {
+        validate.validateUserCreation(params);
+    } catch (error) {
+        return res.status(400).send({
+            status: 'error',
+            message: 'Validacion de creacion del usuario no superada',
+        });
+    }
+
+    // Buscar y actualizar usuairo en la base de datos
+    try {
+        // Buscar usuarios con el mismo email
+        const duplicatedUser = await User.find({
+            email: params.email.toLowerCase(),
+        });
+
+        // Verificar si hay un usuario con el mismo email aparte del usuario actual
+        let UserIsSet = false;
+        duplicatedUser.forEach((user) => {
+            if (user && user._id != userIdentity._id) {
+                UserIsSet = true;
+            }
+        });
+
+        // Retornar error si es que se encuentra usuario con mismo email
+        if (UserIsSet) {
+            return res.status(500).send({
+                status: 'error',
+                message: 'El correo electronico ya se encuentra en uso',
+            });
+        }
+
+        // Si llega la password se cifra
+        if (params.password) {
+            const cipheredPassword = await bcrypt.hash(params.password, 10);
+            params.password = cipheredPassword;
+        }
+
+        // Buscar y actualizar, se oculta la password
+        const updatedUser = await User.findByIdAndUpdate(
+            userIdentity.id,
+            params,
+            { new: true }
+        ).select('-password');
+
+        return res.status(200).send({
+            status: 'ok',
+            message: 'Usuario actualizado',
+            updatedUser,
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: 'error',
+            message: 'No se ha podido actualizar el usuario',
+            error,
+        });
+    }
+};
+
+module.exports = {
+    createUser,
+    loginUser,
+    getUsers,
+    getSpecificUser,
+    updateUser,
+};
