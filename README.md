@@ -201,6 +201,40 @@ Se actualiza el usuario del Json web token con el cual se llame a este endpoint.
 }
 ```
 
+#### `POST /apiv1/user/delete/:id`
+
+Se elimina al usuario especificado en el parametro de id del endpoint. Si el usuario quiere borrar a un usuario distinto a el, este deberá tener el rol `role_admin` en su token de autorización, en cambio, si el usuario desea borrarse a si mismo, lo podrá hacer teniendo el rol `role_user`.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2YjEzZTdlZTM4MGYwMTg3ZTU5OWU5MSIsIm5hbWUiOiJub21icmVCb3JyYXIiLCJzdXJuYW1lIjoiYXBlbGxpZG9Cb3JyYXIiLCJlbWFpbCI6ImVtYWlsQGJvcnJhci5jb20iLCJyb2xlIjoicm9sZV91c2VyIiwiaWF0IjoxNzIyODkxOTI3LCJleHAiOjE3MjU0ODM5Mjd9.4FCngeaWrs59NRRYySRzLSwBVdKwJUiNxn118d1s0gc`
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`id=66b13e7ee380f0187e599e91`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "message": "Usuario eliminado",
+    "deletedUser": {
+        "_id": "66b13e7ee380f0187e599e91",
+        "name": "nombreBorrar",
+        "surname": "apellidoBorrar",
+        "email": "email@borrar.com",
+        "password": "$2b$10$KkjXUbeoctQzmxN1kjpOx.g3fTf3iVG3.NDFx5/vbKyw/UmeSnufm",
+        "role": "role_user",
+        "created_at": "2024-08-05T21:05:02.452Z",
+        "__v": 0
+    }
+}
+```
+
+<!--> Apartado de tareas <!-->
+
 ### Tareas
 
 #### `POST /apiv1/task/create-task`
