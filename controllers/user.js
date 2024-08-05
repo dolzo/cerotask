@@ -243,10 +243,53 @@ const updateUser = async (req, res) => {
     }
 };
 
+// Borrar un usuario especifico
+
+const deleteUser = async (req, res) => {
+    // Recoger datos del usuario
+    const userIdentity = req.user;
+
+    // Recoger usuario a borrar
+    const userId = req.params.id;
+
+    // Validar que el usuario sea el mismo que el usuario a borrar
+    if (userIdentity.id != userId && userIdentity !== 'role_admin') {
+        // Si son distintos
+        return res.status(401).send({
+            status: 'Unauthorized',
+            message: 'No estas autorizado a borrar este usuario',
+        });
+    }
+
+    try {
+        // Buscar y borrar el usuario
+        const deletedUser = await User.findByIdAndDelete(userId);
+
+        if (deletedUser === null) {
+            return res.status(404).send({
+                status: 'ok',
+                message: 'No se ha encontrado al usuario con la ID indicada',
+            });
+        }
+
+        return res.status(200).send({
+            status: 'ok',
+            message: 'Usuario eliminado',
+            deletedUser,
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: 'error',
+            error,
+        });
+    }
+};
+
 module.exports = {
     createUser,
     loginUser,
     getUsers,
     getSpecificUser,
     updateUser,
+    deleteUser,
 };
