@@ -267,3 +267,44 @@ Se crea una nueva tarea con los datos indicados en el body de la solicitud, esta
     }
 }
 ```
+
+#### `GET /apiv1/task/tasks`
+
+Este endpoint retorna todas las tareas registradas por los usuarios guardadas en la base de datos. Para poder usar este endpoint se debe estas logueado como un usuario que tenga el rol de `role_admin`.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWVhNWNiODMyM2EwMjdiZTc1ZjJhZCIsIm5hbWUiOiJOb21icmUiLCJzdXJuYW1lIjoiQXBlbGxpZG8iLCJlbWFpbCI6ImNvcnJlb0Bwcm92ZWVkb3IuY29tIiwicm9sZSI6InJvbGVfYWRtaW4iLCJpYXQiOjE3MjI5NjczOTksImV4cCI6MTcyNTU1OTM5OX0.3utnb9thWPpQCQ5FSTaUxzHG2WzUan9CE8I94lPmVHM`
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+No hay parametros de consulta en esta solicitud
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "tasks": [
+        {
+            "_id": "669ab168406cbe2cc759d2c3",
+            "title": "cama",
+            "description": "hacer la cama",
+            "completed": false,
+            "user": "669aab39abf1694a611e62d4",
+            "created_at": "2024-07-19T18:33:12.266Z",
+            "__v": 0
+        },
+        {
+            "_id": "669ea84b8323a027be75f2b1",
+            "title": "aseo",
+            "description": "Ordenar la casa",
+            "completed": false,
+            "user": "669aab39abf1694a611e62d4",
+            "created_at": "2024-07-22T18:43:23.011Z",
+            "__v": 0
+        }
+    ]
+}
+```
