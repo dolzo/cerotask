@@ -38,4 +38,33 @@ const createTask = async (req, res) => {
     }
 };
 
-module.exports = { createTask };
+// Listar todas las tareas
+
+const getTasks = async (req, res) => {
+    // Buscar todas las tareas en mongodb
+    try {
+        const tasks = await Task.find();
+
+        // Si no hay tareas
+        if (!tasks) {
+            return res.status(200).send({
+                status: 'ok',
+                message: 'No se han encontrado tareas',
+            });
+        }
+
+        // Retornar las tareas
+        return res.status(200).send({
+            status: 'ok',
+            tasks,
+        });
+    } catch (error) {
+        // Retornar error
+        return res.status(200).send({
+            status: 'error',
+            error,
+        });
+    }
+};
+
+module.exports = { createTask, getTasks };
