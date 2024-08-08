@@ -67,4 +67,50 @@ const getTasks = async (req, res) => {
     }
 };
 
-module.exports = { createTask, getTasks };
+const getSpecificTask = async (req, res) => {
+    // Parametro de id de usuario en la url
+    const taskId = req.params.id;
+
+    // Usuario logeado
+    const userIdentity = req.user;
+
+    // Buscar la tarea
+    try {
+        const taskFound = await Task.findById(taskId);
+
+        // Si no hay tarea encontrada
+        if (!taskFound) {
+            return res.status(404).send({
+                status: 'ok',
+                message: 'No se ha encontrado la tarea',
+            });
+        }
+
+        // Validar que el usuario sea el mismo que el usuario a borrar
+        if (
+            userIdentity.id != taskFound.user &&
+            userIdentity.role !== 'role_admin'
+        ) {
+            // Si son distintos
+            return res.status(401).send({
+                status: 'Unauthorized',
+                message: 'No estas autorizado a acceder a esta tarea',
+            });
+        }
+
+        // Retornar la tarea
+        return res.status(200).send({
+            status: 'ok',
+            taskFound,
+        });
+    } catch (error) {
+        // Retornar error
+
+        return res.status(500).send({
+            status: 'error',
+            error: error.message,
+        });
+    }
+};
+
+module.exports = { createTask, getTasks, getSpecificTask };
