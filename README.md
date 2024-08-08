@@ -308,3 +308,33 @@ No hay parametros de consulta en esta solicitud
     ]
 }
 ```
+
+#### `GET /apiv1/task/tasks:id`
+
+En este endpoint se obtiene una tarea en especifico mediante su id. Para poder usar este endpoint, el usuario debe ser aquel que creó la tarea, o en su defecto, tener el rol de `role_admin`.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2YjEzOTljZGVmZDI1MzhmMTIwNDJlNCIsIm5hbWUiOiJub21icmVhYWEiLCJzdXJuYW1lIjoiYXBlbGxpZG9hYWEiLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvYWFhIiwicm9sZSI6InJvbGVfdXNlciIsImlhdCI6MTcyMzE0NTU1MywiZXhwIjoxNzI1NzM3NTUzfQ.x4Whjr2Ka3kcHfz4w9kvpytX6uco_KDByJPohOe5m8U`
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`id=66b51dd0070d70eaf066afc0`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "taskFound": {
+        "_id": "66b51dd0070d70eaf066afc0",
+        "title": "TareaUser",
+        "description": "esta es la tarea de user normal",
+        "completed": false,
+        "user": "66b1399cdefd2538f12042e4",
+        "created_at": "2024-08-08T19:34:40.032Z",
+        "__v": 0
+    }
+}
+```
