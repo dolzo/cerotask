@@ -84,8 +84,7 @@ const validateTaskCreation = (params) => {
     // Validar titulo
     let title =
         !validator.isEmpty(params.title) &&
-        validator.isLength(params.title, { min: 1, max: 128 }) &&
-        validator.isAlphanumeric(params.title, 'es-ES');
+        validator.isLength(params.title, { min: 1, max: 128 });
 
     // Validar descripcion
     let description =
