@@ -26,7 +26,7 @@ const createTask = async (req, res) => {
         const task = new Task(params);
 
         // En el caso de que se quiera asignar la tarea a un usuario distinto al del jwt, se retorna error
-        if (task.user !== userIdentity.id) {
+        if (task.user != userIdentity.id) {
             return res.status(400).send({
                 status: 'error',
                 message:
