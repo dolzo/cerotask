@@ -52,7 +52,7 @@ const createUser = async (req, res) => {
         return res.status(500).send({
             stauts: 'error',
             message: 'Ha ocurrido un error al guardar el usuario',
-            error,
+            error: error.message,
         });
     }
 };
@@ -136,7 +136,7 @@ const getUsers = async (req, res) => {
     } catch (error) {
         return res.status(400).send({
             status: 'error',
-            error,
+            error: error.message,
         });
     }
 };
@@ -169,7 +169,7 @@ const getSpecificUser = async (req, res) => {
     } catch (error) {
         return res.status(400).send({
             status: 'error',
-            error,
+            error: error.message,
         });
     }
 };
@@ -238,7 +238,7 @@ const updateUser = async (req, res) => {
         return res.status(500).send({
             status: 'error',
             message: 'No se ha podido actualizar el usuario',
-            error,
+            error: error.message,
         });
     }
 };
@@ -280,7 +280,7 @@ const deleteUser = async (req, res) => {
     } catch (error) {
         return res.status(500).send({
             status: 'error',
-            error,
+            error: error.message,
         });
     }
 };
