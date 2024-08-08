@@ -8,6 +8,9 @@ const createTask = async (req, res) => {
     // Recoger parametros
     const params = req.body;
 
+    // Recoger datos del usuario
+    const userIdentity = req.user;
+
     // Validar parametros
     try {
         validate.validateTaskCreation(params);
@@ -22,6 +25,16 @@ const createTask = async (req, res) => {
     try {
         const task = new Task(params);
 
+        // En el caso de que se quiera asignar la tarea a un usuario distinto al del jwt, se retorna error
+        if (task.user !== userIdentity.id) {
+            return res.status(400).send({
+                status: 'error',
+                message:
+                    'No se puede asignar esta tarea a un usuario diferente al logeado',
+            });
+        }
+
+        // Guardar la tarea
         const savedTask = await task.save();
 
         return res.status(200).send({
