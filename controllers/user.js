@@ -115,7 +115,6 @@ const loginUser = async (req, res) => {
 // Obtener todos los usuarios
 
 const getUsers = async (req, res) => {
-    // Usuario del jwt
     currentUser = req.user;
 
     try {
