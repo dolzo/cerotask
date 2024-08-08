@@ -115,8 +115,6 @@ const loginUser = async (req, res) => {
 // Obtener todos los usuarios
 
 const getUsers = async (req, res) => {
-    currentUser = req.user;
-
     try {
         // Buscar el usuario
         const users = await User.find().select('-password');
