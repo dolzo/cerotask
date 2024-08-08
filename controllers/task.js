@@ -33,7 +33,7 @@ const createTask = async (req, res) => {
         return res.status(500).send({
             status: 'error',
             message: 'Ha ocurrido un error al guardar la tarea',
-            error,
+            error: error.message,
         });
     }
 };
@@ -62,7 +62,7 @@ const getTasks = async (req, res) => {
         // Retornar error
         return res.status(200).send({
             status: 'error',
-            error,
+            error: error.message,
         });
     }
 };
