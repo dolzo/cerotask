@@ -126,4 +126,37 @@ const getSpecificTask = async (req, res) => {
     }
 };
 
-module.exports = { createTask, getTasks, getSpecificTask };
+const getUserTasks = async (req, res) => {
+    // Recoger parametro del usuario de la url
+    const userId = req.params.id;
+
+    // Recoger el usuario logueado
+    const userIdentity = req.user;
+
+    // Verificar que el usuario sea de las tareas sea aquel logueado, o que tenga rol de admin
+    if (userId != userIdentity.id && userIdentity.role != 'role_admin') {
+        return res.status(403).send({
+            status: 'error',
+            message: 'Acceso no autorizado',
+        });
+    }
+
+    // Hacer consulta en la base de datos
+    try {
+        const userTasks = await Task.find({ user: userId });
+
+        // retornar tareas del usuario
+        return res.status(200).send({
+            status: 'ok',
+            userTasks,
+        });
+    } catch (error) {
+        // Retornar error
+        return res.status(500).send({
+            status: 'error',
+            error: error.message,
+        });
+    }
+};
+
+module.exports = { createTask, getTasks, getSpecificTask, getUserTasks };
