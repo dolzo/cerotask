@@ -338,3 +338,44 @@ En este endpoint se obtiene una tarea en especifico mediante su id. Para poder u
     }
 }
 ```
+
+#### `GET /apiv1/user-tasks/:id`
+
+Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el parametro `id` mediante la url, siendo este el id del usuario al cual se accederan a sus tareas. Un usuario con el rol de admin puede revisar las tareas de otros usuario.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2YjEzOTljZGVmZDI1MzhmMTIwNDJlNCIsIm5hbWUiOiJub21icmVhYWEiLCJzdXJuYW1lIjoiYXBlbGxpZG9hYWEiLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvYWFhIiwicm9sZSI6InJvbGVfdXNlciIsImlhdCI6MTcyMzMxMDkwOSwiZXhwIjoxNzI1ODk5MzA5fQ.CqExRq9ftm8ktHbzcusZb0igWgnGbZeVyQDIiTylZ6I`
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`id=66b1399cdefd2538f12042e4`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "userTasks": [
+        {
+            "_id": "66b52403b1aa9cf8f9f54744",
+            "title": "Tarea User",
+            "description": "esta es la tarea de user normal",
+            "completed": false,
+            "user": "66b1399cdefd2538f12042e4",
+            "created_at": "2024-08-08T20:01:07.697Z",
+            "__v": 0
+        },
+        {
+            "_id": "66b7a6fb85c94139f10dd95b",
+            "title": "Aseo",
+            "description": "lavar los platos",
+            "completed": false,
+            "user": "66b1399cdefd2538f12042e4",
+            "created_at": "2024-08-10T17:44:27.937Z",
+            "__v": 0
+        }
+    ]
+}
+```
