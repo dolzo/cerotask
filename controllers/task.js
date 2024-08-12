@@ -80,6 +80,8 @@ const getTasks = async (req, res) => {
     }
 };
 
+// Retornar una tarea en especifico mediante su id
+
 const getSpecificTask = async (req, res) => {
     // Parametro de id de usuario en la url
     const taskId = req.params.id;
@@ -125,6 +127,8 @@ const getSpecificTask = async (req, res) => {
         });
     }
 };
+
+// Retornar todas las tareas de un usuario
 
 const getUserTasks = async (req, res) => {
     // Recoger parametro del usuario de la url
