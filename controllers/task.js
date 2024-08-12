@@ -190,23 +190,29 @@ const updateTask = async (req, res) => {
     try {
         const task = await Task.findById(taskId);
 
-        if (task.user != userIdentity.id) {
+        // Validar que solo el usuario que creo la tare o un admin la puedan actualizar
+        if (
+            task.user != userIdentity.id &&
+            userIdentity.role !== 'role_admin'
+        ) {
             return res.status(403).send({
                 status: 'Unauthorized',
                 message: 'No se puede actualizar esta tarea',
             });
         }
 
+        // Actualizar la tarea
         const updatedTask = await Task.findByIdAndUpdate(taskId, params, {
             new: true,
         });
 
         return res.status(200).send({
             status: 'ok',
-            message: 'actualizar tarea',
+            message: 'Se ha actualizado la tarea',
             updatedTask,
         });
     } catch (error) {
+        // Retornar error
         return res.status(500).send({
             status: 'error',
             message: error.message,
