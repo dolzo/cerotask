@@ -112,9 +112,39 @@ const validateTaskCreation = (params) => {
     }
 };
 
+// Validar actualizacion de una tarea
+const validateTaskUpdate = (params) => {
+    const titleParam = params.title;
+    const descripcionParam = params.descripcion;
+
+    if (!titleParam && !descripcionParam) {
+        throw new Error('No se han entregado parametros para actualizar');
+    }
+
+    // Validar titulo
+    if (params.title) {
+        let title = validator.isLength(params.title, { min: 1, max: 128 });
+        if (!title) {
+            throw new Error('El titulo no es valido');
+        }
+    }
+
+    // Validar descripcion
+    if (params.description) {
+        let description = validator.isLength(params.description, {
+            min: 1,
+            max: 1024,
+        });
+        if (!description) {
+            throw new Error('La descripcion no es valida');
+        }
+    }
+};
+
 module.exports = {
     validateUserCreation,
     validateLogin,
     validateTaskCreation,
     validateUpdateUser,
+    validateTaskUpdate,
 };

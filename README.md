@@ -379,3 +379,35 @@ Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el pa
     ]
 }
 ```
+
+#### PUT `GET /apiv1/update-task/:id`
+
+Este endpoint se usa para actualizar una tarea con los parametros indicados en el cuerpo de la solicitud. Si algun parametro no es ingresado, se pasara por alto. Solamente el usuario que creo la tarea o un admin pueden actualizar dicha tarea.
+
+##### Headers
+
+-   Authorization: ``
+
+-   Content-Type: ``
+
+##### Request
+
+`id=66ba365f15a1f8e8fac3f336&title=Pasear al perro&description=Sacar a caminar a huesos`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "message": "actualizar tarea",
+    "updatedTask": {
+        "_id": "66ba365f15a1f8e8fac3f336",
+        "title": "Pasear al perro",
+        "description": "Sacar a caminar a huesos",
+        "completed": false,
+        "user": "66ba271c6d00dd8eef912715",
+        "created_at": "2024-08-12T16:20:47.118Z",
+        "__v": 0
+    }
+}
+```
