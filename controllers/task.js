@@ -163,4 +163,61 @@ const getUserTasks = async (req, res) => {
     }
 };
 
-module.exports = { createTask, getTasks, getSpecificTask, getUserTasks };
+// Actualizar una tarea especifica
+
+const updateTask = async (req, res) => {
+    // Recoger parametro de la tarea mediante la url
+    const taskId = req.params.id;
+
+    // Recoger el usuario logueado
+    const userIdentity = req.user;
+
+    // Recoger los parametros de actualizacion
+    const params = req.body;
+
+    // Validar los parametros
+    try {
+        validate.validateTaskUpdate(params);
+    } catch (error) {
+        return res.status(400).send({
+            status: 'error',
+            message: error.message,
+        });
+    }
+
+    // Buscar y actualizar la tarea
+
+    try {
+        const task = await Task.findById(taskId);
+
+        if (task.user != userIdentity.id) {
+            return res.status(403).send({
+                status: 'Unauthorized',
+                message: 'No se puede actualizar esta tarea',
+            });
+        }
+
+        const updatedTask = await Task.findByIdAndUpdate(taskId, params, {
+            new: true,
+        });
+
+        return res.status(200).send({
+            status: 'ok',
+            message: 'actualizar tarea',
+            updatedTask,
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: 'error',
+            message: error.message,
+        });
+    }
+};
+
+module.exports = {
+    createTask,
+    getTasks,
+    getSpecificTask,
+    getUserTasks,
+    updateTask,
+};
