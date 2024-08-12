@@ -182,11 +182,11 @@ const updateUser = async (req, res) => {
 
     // Validar parametros
     try {
-        validate.validateUserCreation(params);
+        validate.validateUpdateUser(params);
     } catch (error) {
         return res.status(400).send({
             status: 'error',
-            message: 'Validacion de creacion del usuario no superada',
+            message: error.message,
         });
     }
 

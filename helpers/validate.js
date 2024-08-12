@@ -49,50 +49,33 @@ const validateLogin = (params) => {
     }
 };
 
-// Validar datos update user
+// Validar datos update
 const validateUpdateUser = (params) => {
-    // Validar nombre si es que hay
-    if (params.name) {
-        let name =
-            validator.isLength(params.name, { min: 3, max: undefined }) &&
-            validator.isAlpha(params.name, 'es-ES');
+    // Validar nombre
+    let name =
+        validator.isLength(params.name, { min: 3, max: undefined }) &&
+        validator.isAlpha(params.name, 'es-ES');
 
-        if (!name) {
-            throw new Error('El nombre no es valido');
-        }
-    }
+    // Validar apellido
+    let surname =
+        validator.isLength(params.surname, { min: 2, max: undefined }) &&
+        validator.isAlpha(params.surname, 'es-ES');
 
-    // Validar apellido si es que hay
-    if (params.surname) {
-        let surname =
-            validator.isLength(params.surname, { min: 2, max: undefined }) &&
-            validator.isAlpha(params.surname, 'es-ES');
+    // Validar email
+    let email = true;
 
-        if (!surname) {
-            throw new Error('El apellido no es valido');
-        }
-    }
+    // Validar contrasenia
+    let password = validator.isStrongPassword(params.password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 0,
+    });
 
-    // Validar email si es que hay
-    if (params.email) {
-        let email = validator.isEmail(params.email);
-        if (!email) {
-            throw new Error('El email no es valido');
-        }
-    }
-
-    // Validar contrasenia si es que hay
-    if (params.password) {
-        let password = validator.isStrongPassword(params.password, {
-            minLength: 8,
-            minLowercase: 1,
-            minUppercase: 1,
-            minNumbers: 1,
-            minSymbols: 0,
-        });
-        if (!password) {
-            throw new Error('La clave no es valida');
-        }
+    // Comprobar si todo anda bien
+    if (!name || !surname || !email || !password) {
+        throw new Error('No se ha superado la validacion del registro');
     }
 };
 
@@ -110,7 +93,7 @@ const validateTaskCreation = (params) => {
 
     // Comprobar si todo anda bien
     if (!title || !description) {
-        throw new Error('Validacion de creacion de tarea no superada');
+        throw new Error('Validacion de la tarea no superada');
     }
 };
 
