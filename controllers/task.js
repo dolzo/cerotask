@@ -220,10 +220,67 @@ const updateTask = async (req, res) => {
     }
 };
 
+// Metodo para borrar tarea
+
+const deleteTask = async (req, res) => {
+    // Obtener datos del usuario logueado
+    const userIdentity = req.user;
+
+    // Obtener id de la tarea
+    const taskId = req.params.id;
+
+    try {
+        // Buscar la tarea
+        const task = await Task.findById(taskId);
+
+        // Si la id no coincide con ninguna tarea
+        if (!task) {
+            return res.status(404).send({
+                status: 'ok',
+                message: 'No se ha encontrado la tarea solicitada',
+            });
+        }
+
+        // Validar si el usuario logueado creo la tarea, o un admin
+        if (
+            task.user != userIdentity.id &&
+            userIdentity.role !== 'role_admin'
+        ) {
+            return res.status(403).send({
+                status: 'Unauthorized',
+                message: 'No se puede eliminar esta tarea',
+            });
+        }
+
+        // Borrar tarea
+        const deletedTask = await Task.findByIdAndDelete(taskId);
+
+        // Si no hay tarea
+        if (deletedTask === null) {
+            return res.status(404).send({
+                status: 'ok',
+                message: 'No se ha encontrado la tarea indicada',
+            });
+        }
+
+        return res.status(200).send({
+            status: 'ok',
+            message: 'Tarea eliminada',
+            deletedTask,
+        });
+    } catch (error) {
+        return res.status(500).send({
+            status: 'error',
+            message: error.message,
+        });
+    }
+};
+
 module.exports = {
     createTask,
     getTasks,
     getSpecificTask,
     getUserTasks,
     updateTask,
+    deleteTask,
 };
