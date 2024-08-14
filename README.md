@@ -380,15 +380,15 @@ Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el pa
 }
 ```
 
-#### PUT `GET /apiv1/update-task/:id`
+#### `PUT /apiv1/update-task/:id`
 
 Este endpoint se usa para actualizar una tarea con los parametros indicados en el cuerpo de la solicitud. Si algun parametro no es ingresado, se pasara por alto. Solamente el usuario que creo la tarea o un admin pueden actualizar dicha tarea.
 
 ##### Headers
 
--   Authorization: ``
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2YmEyNzFjNmQwMGRkOGVlZjkxMjcxNSIsIm5hbWUiOiJOb21icmVVc2VyIiwic3VybmFtZSI6IkFwZWxsaWRvVXNlciIsImVtYWlsIjoidXNlcjFAY2Vyb3Rhc2suY29tIiwicm9sZSI6InJvbGVfdXNlciIsImlhdCI6MTcyMzQ3NTg1MywiZXhwIjoxNzI2MDY0MjUzfQ.M_oJ2qQ1l3dFkca0r4Oeum8kcqsxZsDli5agDvcPS38`
 
--   Content-Type: ``
+-   Content-Type: `application/x-www-form-urlencoded`
 
 ##### Request
 
