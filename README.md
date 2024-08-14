@@ -411,3 +411,35 @@ Este endpoint se usa para actualizar una tarea con los parametros indicados en e
     }
 }
 ```
+
+#### `DELETE /apiv1/delete/:id`
+
+Este endpoint permite eliminar una tarea en especifico mediante su `id`, dicha tarea solo podra ser eliminada si es que el usuario que se encuentra logueado fue el que la creó, o en su defecto, si el usuario logueado tiene el rol `role_admin`.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2YmEyNzFjNmQwMGRkOGVlZjkxMjcxNSIsIm5hbWUiOiJOb21icmVVc2VyIiwic3VybmFtZSI6IkFwZWxsaWRvVXNlciIsImVtYWlsIjoidXNlcjFAY2Vyb3Rhc2suY29tIiwicm9sZSI6InJvbGVfdXNlciIsImlhdCI6MTcyMzQ3NTg1MywiZXhwIjoxNzI2MDY0MjUzfQ.M_oJ2qQ1l3dFkca0r4Oeum8kcqsxZsDli5agDvcPS38`
+
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`id=66bc98187710354fc1f3ffef`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "message": "Tarea eliminada",
+    "deletedTask": {
+        "_id": "66bc98187710354fc1f3ffef",
+        "title": "Aseo",
+        "description": "lavar los platos",
+        "completed": false,
+        "user": "66ba271c6d00dd8eef912715",
+        "created_at": "2024-08-14T11:42:16.674Z",
+        "__v": 0
+    }
+}
+```
