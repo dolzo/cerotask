@@ -309,7 +309,7 @@ No hay parametros de consulta en esta solicitud
 }
 ```
 
-#### `GET /apiv1/task/tasks:id`
+#### `GET /apiv1/task/tasks/:id`
 
 En este endpoint se obtiene una tarea en especifico mediante su id. Para poder usar este endpoint, el usuario debe ser aquel que creó la tarea, o en su defecto, tener el rol de `role_admin`.
 
@@ -339,7 +339,7 @@ En este endpoint se obtiene una tarea en especifico mediante su id. Para poder u
 }
 ```
 
-#### `GET /apiv1/user-tasks/:id`
+#### `GET /apiv1/task/user-tasks/:id`
 
 Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el parametro `id` mediante la url, siendo este el id del usuario al cual se accederan a sus tareas. Un usuario con el rol de admin puede revisar las tareas de otros usuario.
 
@@ -380,7 +380,7 @@ Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el pa
 }
 ```
 
-#### `PUT /apiv1/update-task/:id`
+#### `PUT /apiv1/task/update-task/:id`
 
 Este endpoint se usa para actualizar una tarea con los parametros indicados en el cuerpo de la solicitud. Si algun parametro no es ingresado, se pasara por alto. Solamente el usuario que creo la tarea o un admin pueden actualizar dicha tarea.
 
@@ -412,7 +412,7 @@ Este endpoint se usa para actualizar una tarea con los parametros indicados en e
 }
 ```
 
-#### `DELETE /apiv1/delete/:id`
+#### `DELETE /apiv1/task/delete/:id`
 
 Este endpoint permite eliminar una tarea en especifico mediante su `id`, dicha tarea solo podra ser eliminada si es que el usuario que se encuentra logueado fue el que la creó, o en su defecto, si el usuario logueado tiene el rol `role_admin`.
 
