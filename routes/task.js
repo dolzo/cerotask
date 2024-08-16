@@ -16,6 +16,6 @@ router.get('/tasks/:id', auth, task.getSpecificTask);
 router.get('/user-tasks/:id', auth, task.getUserTasks);
 router.put('/update-task/:id', auth, task.updateTask);
 router.delete('/delete/:id', auth, task.deleteTask);
-router.patch('/state/:id', auth, task.taskState);
+router.patch('/status/:id', auth, task.taskState);
 
 module.exports = router;
