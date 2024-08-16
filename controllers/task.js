@@ -276,6 +276,74 @@ const deleteTask = async (req, res) => {
     }
 };
 
+// Metodo para cambiar el estado de una tarea
+
+const taskState = async (req, res) => {
+    // Recibir el usuario logueado
+    const userIdentity = req.user;
+
+    // Recibir estado por el body
+    const taskStatus = req.body.status;
+
+    // Recibir el id de la tarea de la url
+    const taskId = req.params.id;
+
+    // Si el parametro es diferente a un booleano se retorna error
+    if (taskStatus !== 'true' && taskStatus !== 'false') {
+        return res.status(400).send({
+            status: 'error',
+            message: 'El valor del parametro de completado no es un booleano',
+        });
+    }
+
+    // Cambiar estado en mongodb
+    try {
+        // Buscar la tarea
+        const task = await Task.findById(taskId);
+
+        // Si la id no coincide con ninguna tarea
+        if (!task) {
+            return res.status(404).send({
+                status: 'ok',
+                message: 'No se ha encontrado la tarea solicitada',
+            });
+        }
+
+        // Validar si el usuario logueado creo la tarea, o un admin
+        if (
+            task.user != userIdentity.id &&
+            userIdentity.role !== 'role_admin'
+        ) {
+            return res.status(403).send({
+                status: 'Unauthorized',
+                message: 'No se puede cambiar el estado de esta tarea',
+            });
+        }
+
+        // Cambiar el estado de la tarea
+        const updatedTask = await Task.findByIdAndUpdate(
+            taskId,
+            {
+                completed: taskStatus,
+            },
+            { new: true }
+        );
+
+        // Retornar la tarea
+        res.status(200).send({
+            status: 'ok',
+            message: 'Estado actualizado',
+            updatedTask,
+        });
+    } catch (error) {
+        // Retornar el error
+        return res.status(500).send({
+            status: 'error',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     createTask,
     getTasks,
@@ -283,4 +351,5 @@ module.exports = {
     getUserTasks,
     updateTask,
     deleteTask,
+    taskState,
 };
