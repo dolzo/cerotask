@@ -443,3 +443,35 @@ Este endpoint permite eliminar una tarea en especifico mediante su `id`, dicha t
     }
 }
 ```
+
+#### `PATCH /apiv1/task/status/:id`
+
+Este endpoint permite cambiar el estado del atributo `completed` de una tarea por los valores `true` o `false` según sea requerido. Esto solo podrá ser realizado por el usuario que creó la tarea o por un usuario con el rol de `role_admin`.
+
+##### Headers
+
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2YmEyNzFjNmQwMGRkOGVlZjkxMjcxNSIsIm5hbWUiOiJOb21icmVVc2VyIiwic3VybmFtZSI6IkFwZWxsaWRvVXNlciIsImVtYWlsIjoidXNlcjFAY2Vyb3Rhc2suY29tIiwicm9sZSI6InJvbGVfdXNlciIsImlhdCI6MTcyMzQ3NTg1MywiZXhwIjoxNzI2MDY0MjUzfQ.M_oJ2qQ1l3dFkca0r4Oeum8kcqsxZsDli5agDvcPS38`
+
+-   Content-Type: `application/x-www-form-urlencoded`
+
+##### Request
+
+`id=66ba365f15a1f8e8fac3f336&status=true`
+
+##### Response
+
+```json
+{
+    "status": "ok",
+    "message": "Estado actualizado",
+    "updatedTask": {
+        "_id": "66ba365f15a1f8e8fac3f336",
+        "title": "Pasear al perro",
+        "description": "Sacar a caminar a huesos",
+        "completed": true,
+        "user": "66ba271c6d00dd8eef912715",
+        "created_at": "2024-08-12T16:20:47.118Z",
+        "__v": 0
+    }
+}
+```
