@@ -268,7 +268,7 @@ Se crea una nueva tarea con los datos indicados en el body de la solicitud, esta
 }
 ```
 
-#### `GET /apiv1/task/tasks/:page`
+#### `GET /apiv1/tasks/page/:page`
 
 Este endpoint retorna todas las tareas registradas por los usuarios que se encuentran guardadas en la base de datos. Este recibe como parametro el numero de pagina, cada pagina contiene 10 tareas. Para poder usar este endpoint se debe estas logueado como un usuario que tenga el rol de `role_admin`.
 
