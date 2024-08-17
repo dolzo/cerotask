@@ -13,7 +13,7 @@ const task = require('../controllers/task');
 router.post('/create-task', auth, task.createTask);
 router.get('/tasks/:page', auth, checkAdminRole, task.getTasks);
 router.get('/tasks/:id', auth, task.getSpecificTask);
-router.get('/user-tasks/:id', auth, task.getUserTasks);
+router.get('/user-tasks/:id/:page', auth, task.getUserTasks);
 router.put('/update-task/:id', auth, task.updateTask);
 router.delete('/delete/:id', auth, task.deleteTask);
 router.patch('/status/:id', auth, task.taskState);

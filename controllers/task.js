@@ -158,6 +158,12 @@ const getUserTasks = async (req, res) => {
     // Recoger el usuario logueado
     const userIdentity = req.user;
 
+    // Recoger la pagina desde la url
+    const page = req.params.page;
+
+    // Establecer limite de documentos a 10
+    const limit = 10;
+
     // Verificar que el usuario sea de las tareas sea aquel logueado, o que tenga rol de admin
     if (userId != userIdentity.id && userIdentity.role != 'role_admin') {
         return res.status(403).send({
@@ -168,12 +174,22 @@ const getUserTasks = async (req, res) => {
 
     // Hacer consulta en la base de datos
     try {
-        const userTasks = await Task.find({ user: userId });
+        const options = {
+            page: page,
+            limit: limit,
+            sort: { created_at: -1 },
+        };
+
+        const userTasks = await Task.paginate({ user: userId }, options);
 
         // retornar tareas del usuario
         return res.status(200).send({
             status: 'ok',
-            userTasks,
+            totalPages: userTasks.totalPages,
+            currentPage: userTasks.page,
+            hasNextPage: userTasks.hasNextPage,
+            hasPrevPage: userTasks.hasPrevPage,
+            tasks: userTasks.docs,
         });
     } catch (error) {
         // Retornar error
