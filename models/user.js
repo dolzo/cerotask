@@ -1,5 +1,6 @@
 // Importar dependencias de mongoose
 const { Schema, model } = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 // El esquema de un usuario
 const UserSchema = Schema({
@@ -28,5 +29,7 @@ const UserSchema = Schema({
         default: Date.now,
     },
 });
+
+UserSchema.plugin(mongoosePaginate);
 
 module.exports = model('UserSchema', UserSchema, 'users');
