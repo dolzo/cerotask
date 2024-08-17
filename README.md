@@ -270,7 +270,7 @@ Se crea una nueva tarea con los datos indicados en el body de la solicitud, esta
 
 #### `GET /apiv1/task/tasks`
 
-Este endpoint retorna todas las tareas registradas por los usuarios guardadas en la base de datos. Para poder usar este endpoint se debe estas logueado como un usuario que tenga el rol de `role_admin`.
+Este endpoint retorna todas las tareas registradas por los usuarios que se encuentran guardadas en la base de datos. Este recibe como parametro el numero de pagina, cada pagina contiene 10 tareas. Para poder usar este endpoint se debe estas logueado como un usuario que tenga el rol de `role_admin`.
 
 ##### Headers
 
@@ -279,21 +279,52 @@ Este endpoint retorna todas las tareas registradas por los usuarios guardadas en
 
 ##### Request
 
-No hay parametros de consulta en esta solicitud
+`page=1`
 
 ##### Response
 
 ```json
 {
     "status": "ok",
+    "totalPages": 1,
+    "currentPage": 1,
+    "hasNextPage": false,
+    "hasPrevPage": false,
     "tasks": [
         {
-            "_id": "669ab168406cbe2cc759d2c3",
-            "title": "cama",
-            "description": "hacer la cama",
+            "_id": "66ba365f15a1f8e8fac3f336",
+            "title": "Pasear al perro",
+            "description": "Sacar a caminar a huesos",
+            "completed": true,
+            "user": "66ba271c6d00dd8eef912715",
+            "created_at": "2024-08-12T16:20:47.118Z",
+            "__v": 0
+        },
+        {
+            "_id": "66b7a6fb85c94139f10dd95b",
+            "title": "Aseo",
+            "description": "lavar los platos",
             "completed": false,
-            "user": "669aab39abf1694a611e62d4",
-            "created_at": "2024-07-19T18:33:12.266Z",
+            "user": "66b1399cdefd2538f12042e4",
+            "created_at": "2024-08-10T17:44:27.937Z",
+            "__v": 0
+        },
+        {
+            "_id": "66b52403b1aa9cf8f9f54744",
+            "title": "Tarea User",
+            "description": "esta es la tarea de user normal",
+            "completed": false,
+            "user": "66b1399cdefd2538f12042e4",
+            "created_at": "2024-08-08T20:01:07.697Z",
+            "__v": 0
+        },
+        {
+            "_id": "66b51ac96c201fc6790ee68d",
+            "title": "Tareaadmin",
+            "description": "esta es la tarea de admin",
+            "completed": false,
+            "user": "669ea56f8323a027be75f2a9",
+            "created_at": "2024-08-08T19:21:45.014Z",
             "__v": 0
         },
         {
@@ -303,6 +334,15 @@ No hay parametros de consulta en esta solicitud
             "completed": false,
             "user": "669aab39abf1694a611e62d4",
             "created_at": "2024-07-22T18:43:23.011Z",
+            "__v": 0
+        },
+        {
+            "_id": "669ab168406cbe2cc759d2c3",
+            "title": "cama",
+            "description": "hacer la cama",
+            "completed": false,
+            "user": "669aab39abf1694a611e62d4",
+            "created_at": "2024-07-19T18:33:12.266Z",
             "__v": 0
         }
     ]
