@@ -115,10 +115,25 @@ const loginUser = async (req, res) => {
 // Obtener todos los usuarios
 
 const getUsers = async (req, res) => {
-    try {
-        // Buscar el usuario
-        const users = await User.find().select('-password');
+    // Recoger pagina
+    const page = parseInt(req.params.page) || 1;
 
+    // Limite de documentos
+    const limit = 10;
+
+    try {
+        // Configuracion de la paginacion
+        const options = {
+            page: page,
+            limit: limit,
+            sort: { created_at: -1 },
+            select: '-password',
+        };
+
+        // Buscar el usuario
+        const users = await User.paginate({}, options);
+
+        // Si no hay usuarios!
         if (!users) {
             return res.status(404).send({
                 status: 'ok',
@@ -128,7 +143,11 @@ const getUsers = async (req, res) => {
 
         return res.status(200).send({
             status: 'ok',
-            users,
+            totalPages: users.totalPages,
+            currentPage: users.page,
+            hasNextPage: users.hasNextPage,
+            hasPrevPage: users.hasPrevPage,
+            users: users.docs,
         });
     } catch (error) {
         return res.status(400).send({
