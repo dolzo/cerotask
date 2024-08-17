@@ -99,41 +99,81 @@ Se inicia sesion con un usuario guardado en la base de datos.
 }
 ```
 
-#### `GET /apiv1/user/users`
+#### `GET /apiv1/user/users/page/:page`
 
-Retorna todos los usuario registrados, para usar este endpoint se requiere tener un token de autenticacion de un usuario con rol de administrador.
+Retorna todos los usuario registrados, se debe ingresar el parametro `page` para indicar la pagina a la cual se desea acceder, cada pagina tiene un total de 10 documentos. Para usar este endpoint se requiere tener un token de autenticacion de un usuario con rol de administrador.
 
 ##### Headers
 
--   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWU5ZGNmMTQ0MDIyMmExYTkzMDIyMiIsIm5hbWUiOiJub21icmUiLCJzdXJuYW1lIjoiYXBlbGxpZG8iLCJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvIiwicm9sZSI6InVzZXJfYWRtaW4iLCJpYXQiOjE3MjE2NzExNDUsImV4cCI6MTcyNDI2MzE0NX0.CHsfdYzCP7qAii_ja0aJCtlyQQ9ZXFtiXd-b3ZiM9Ro`
+-   Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2OWVhNWNiODMyM2EwMjdiZTc1ZjJhZCIsIm5hbWUiOiJOb21icmUiLCJzdXJuYW1lIjoiQXBlbGxpZG8iLCJlbWFpbCI6ImNvcnJlb0Bwcm92ZWVkb3IuY29tIiwicm9sZSI6InJvbGVfYWRtaW4iLCJpYXQiOjE3MjMxNDg5NDMsImV4cCI6MTcyNTc0MDk0M30.FfqKIdEs9sne83lNUEihYoaixFRk74rjirSObD93PoE`
 -   Content-Type: `application/x-www-form-urlencoded`
 
 ##### Request
 
-No hay parametros de consulta en esta solicitud
+`page=1`
 
 ##### Response
 
 ```json
 {
     "status": "ok",
+    "totalPages": 1,
+    "currentPage": 1,
+    "hasNextPage": false,
+    "hasPrevPage": false,
     "users": [
         {
-            "_id": "669ea56f8323a027be75f2a9",
-            "name": "nombre",
-            "surname": "apellido",
-            "email": "email@email.com",
+            "_id": "66ba27266d00dd8eef912718",
+            "name": "NombreUserDos",
+            "surname": "ApellidoUserDos",
+            "email": "user2@cerotask.com",
             "role": "role_user",
-            "created_at": "2024-07-22T18:31:11.096Z",
+            "created_at": "2024-08-12T15:15:50.300Z",
+            "__v": 0
+        },
+        {
+            "_id": "66ba271c6d00dd8eef912715",
+            "name": "NombreUser",
+            "surname": "ApellidoUser",
+            "email": "user1@cerotask.com",
+            "role": "role_user",
+            "created_at": "2024-08-12T15:15:40.171Z",
+            "__v": 0
+        },
+        {
+            "_id": "66ba21a46d00dd8eef912712",
+            "name": "NombreAdmin",
+            "surname": "ApellidoAdmin",
+            "email": "admin@cerotask.com",
+            "role": "role_admin",
+            "created_at": "2024-08-12T14:52:20.711Z",
+            "__v": 0
+        },
+        {
+            "_id": "66b1399cdefd2538f12042e4",
+            "name": "nombreaaa",
+            "surname": "apellidoaaa",
+            "email": "email@email.coaaa",
+            "role": "role_user",
+            "created_at": "2024-08-05T20:44:12.621Z",
             "__v": 0
         },
         {
             "_id": "669ea5cb8323a027be75f2ad",
-            "name": "nombre",
-            "surname": "apellido",
-            "email": "email@email.co",
+            "name": "Nombre",
+            "surname": "Apellidohola",
+            "email": "correo@proveedor.com",
             "role": "role_admin",
             "created_at": "2024-07-22T18:32:43.650Z",
+            "__v": 0
+        },
+        {
+            "_id": "669ea56f8323a027be75f2a9",
+            "name": "Nombre",
+            "surname": "Apellido",
+            "email": "coreeo123@meme.com",
+            "role": "role_user",
+            "created_at": "2024-07-22T18:31:11.096Z",
             "__v": 0
         }
     ]
