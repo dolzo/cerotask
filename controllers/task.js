@@ -1,6 +1,8 @@
 // Dependencias
 const Task = require('../models/task');
 const validate = require('../helpers/validate');
+const mongoosePagination = require('mongoose-paginate-v2');
+const task = require('../models/task');
 
 // Crear tarea
 
@@ -54,9 +56,24 @@ const createTask = async (req, res) => {
 // Listar todas las tareas
 
 const getTasks = async (req, res) => {
+    // Recoger pagina
+    const page = parseInt(req.params.page) || 1;
+
+    // Limite de documentos
+    const limit = 10;
+
     // Buscar todas las tareas en mongodb
     try {
-        const tasks = await Task.find();
+        // Configuracion de la paginacion
+
+        const options = {
+            page: page,
+            limit: limit,
+            sort: { created_at: -1 },
+        };
+
+        // Buscar las taeas con la paginacion
+        const tasks = await Task.paginate({}, options);
 
         // Si no hay tareas
         if (!tasks) {
@@ -69,7 +86,11 @@ const getTasks = async (req, res) => {
         // Retornar las tareas
         return res.status(200).send({
             status: 'ok',
-            tasks,
+            totalPages: tasks.totalPages,
+            currentPage: tasks.page,
+            hasNextPage: tasks.hasNextPage,
+            hasPrevPage: tasks.hasPrevPage,
+            tasks: tasks.docs,
         });
     } catch (error) {
         // Retornar error

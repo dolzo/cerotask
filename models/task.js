@@ -1,5 +1,6 @@
 // Importar dependencias de mongoose
 const { Schema, model } = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 // El esquema de una tarea
 const TaskSchema = Schema({
@@ -24,5 +25,7 @@ const TaskSchema = Schema({
         default: Date.now,
     },
 });
+
+TaskSchema.plugin(mongoosePaginate);
 
 module.exports = model('TaskSchema', TaskSchema, 'tasks');
