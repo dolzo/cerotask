@@ -268,7 +268,7 @@ Se crea una nueva tarea con los datos indicados en el body de la solicitud, esta
 }
 ```
 
-#### `GET /apiv1/task/tasks`
+#### `GET /apiv1/task/tasks/:page`
 
 Este endpoint retorna todas las tareas registradas por los usuarios que se encuentran guardadas en la base de datos. Este recibe como parametro el numero de pagina, cada pagina contiene 10 tareas. Para poder usar este endpoint se debe estas logueado como un usuario que tenga el rol de `role_admin`.
 
@@ -379,9 +379,9 @@ En este endpoint se obtiene una tarea en especifico mediante su id. Para poder u
 }
 ```
 
-#### `GET /apiv1/task/user-tasks/:id`
+#### `GET /apiv1/task/user-tasks/:id/:page`
 
-Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el parametro `id` mediante la url, siendo este el id del usuario al cual se accederan a sus tareas. Un usuario con el rol de admin puede revisar las tareas de otros usuario.
+Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el parametro `id` mediante la url, siendo este el id del usuario al cual se accederan a sus tareas, de igual manera se debe entregar el parametro `page`, este representa el numero de la pagina, cada pagina tiene 10 documentos. Un usuario con el rol de admin puede revisar las tareas de otros usuario.
 
 ##### Headers
 
@@ -390,23 +390,18 @@ Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el pa
 
 ##### Request
 
-`id=66b1399cdefd2538f12042e4`
+`id=66b1399cdefd2538f12042e4&page=1`
 
 ##### Response
 
 ```json
 {
     "status": "ok",
-    "userTasks": [
-        {
-            "_id": "66b52403b1aa9cf8f9f54744",
-            "title": "Tarea User",
-            "description": "esta es la tarea de user normal",
-            "completed": false,
-            "user": "66b1399cdefd2538f12042e4",
-            "created_at": "2024-08-08T20:01:07.697Z",
-            "__v": 0
-        },
+    "totalPages": 1,
+    "currentPage": 1,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "tasks": [
         {
             "_id": "66b7a6fb85c94139f10dd95b",
             "title": "Aseo",
@@ -414,6 +409,15 @@ Con este endpoint, un usuario puede ver todas sus tareas, se debe entregar el pa
             "completed": false,
             "user": "66b1399cdefd2538f12042e4",
             "created_at": "2024-08-10T17:44:27.937Z",
+            "__v": 0
+        },
+        {
+            "_id": "66b52403b1aa9cf8f9f54744",
+            "title": "Tarea User",
+            "description": "esta es la tarea de user normal",
+            "completed": false,
+            "user": "66b1399cdefd2538f12042e4",
+            "created_at": "2024-08-08T20:01:07.697Z",
             "__v": 0
         }
     ]
