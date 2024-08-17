@@ -11,7 +11,7 @@ const task = require('../controllers/task');
 
 // Rutas
 router.post('/create-task', auth, task.createTask);
-router.get('/tasks/:page', auth, checkAdminRole, task.getTasks);
+router.get('/tasks/page/:page', auth, checkAdminRole, task.getTasks);
 router.get('/tasks/:id', auth, task.getSpecificTask);
 router.get('/user-tasks/:id/:page', auth, task.getUserTasks);
 router.put('/update-task/:id', auth, task.updateTask);
